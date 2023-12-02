@@ -27,5 +27,10 @@ case object Game {
         Game(gameId, sequences)
     }
 
+    def parseInput(lines: Iterable[String]): Iterable[Game] = {
+        lines
+          .map(parseGame)
+    }
+
 }
 

@@ -28,40 +28,36 @@ case class ExampleTest() extends AnyFunSpec with Matchers {
     describe("Given a sequence") {
         it("Should parse (3 blue, 4 red)") {
             Sequence.parseSequence("3 blue, 4 red") shouldEqual Sequence(
-                Seq(
-                    Draw(Cube(Color.Blue), 3),
-                    Draw(Cube(Color.Red), 4),
-                )
+                blueDraw = 3,
+                redDraw = 4
             )
         }
     }
 
-    describe("Given a game") {
+    describe("Given a game line") {
         it("Should parse") {
             Game.parseGame("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green") shouldEqual Game(
                 1,
                 Seq(
                     Sequence(
-                        Seq(
-                            Draw(Cube(Color.Blue), 3),
-                            Draw(Cube(Color.Red), 4),
-                        )
+                        blueDraw = 3,
+                        redDraw = 4
                     ),
                     Sequence(
-                        Seq(
-                            Draw(Cube(Color.Red), 1),
-                            Draw(Cube(Color.Green), 2),
-                            Draw(Cube(Color.Blue), 6),
-                        )
+                       redDraw = 1,
+                        greenDraw =  2,
+                        blueDraw = 6
                     ),
                     Sequence(
-                        Seq(
-                            Draw(Cube(Color.Green), 2),
-                        )
+                        greenDraw = 2
                     ),
                 )
             )
         }
+    }
+
+    describe("Given the full input") {
+
     }
 
 }
