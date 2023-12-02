@@ -1,7 +1,11 @@
 case class Game(
                  id: Int,
                  sequences: Iterable[Sequence]
-               )
+               ) {
+    def isPossible(configuration: Configuration): Boolean = {
+        sequences.forall(_.isPossible(configuration))
+    }
+}
 
 
 case object Game {
@@ -30,6 +34,14 @@ case object Game {
     def parseInput(lines: Iterable[String]): Iterable[Game] = {
         lines
           .map(parseGame)
+    }
+
+    def sumPossibleGames(games: Iterable[Game], configuration: Configuration): Int = {
+        games
+          .filter(_.isPossible(configuration))
+          .map(_.id)
+          .reduceOption(_ + _)
+          .getOrElse(0)
     }
 
 }

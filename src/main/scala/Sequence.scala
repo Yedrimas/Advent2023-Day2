@@ -5,7 +5,23 @@ case class Sequence(
                      greenDraw: Int = 0,
                      blueDraw: Int = 0,
                      draws: Iterable[Draw] = Nil
-                   )
+                   ) {
+
+    override def equals(obj: Any): Boolean = {
+        obj match {
+            case otherSeq: Sequence => otherSeq.redDraw == redDraw && otherSeq.greenDraw == greenDraw && otherSeq.blueDraw == blueDraw
+            case _ => super.equals(obj)
+        }
+    }
+
+    def isPossible(c: Configuration): Boolean = {
+        isPossible(c.maxRed, c.maxGreen, c.maxBlue)
+    }
+
+    def isPossible(maxRed: Int, maxGreen: Int, maxBlue: Int): Boolean = {
+        redDraw <= maxRed && greenDraw <= maxGreen && blueDraw <= maxBlue
+    }
+}
 
 object Sequence {
 

@@ -3,7 +3,7 @@ import org.scalatest.matchers.should.Matchers
 
 case class ExampleTest() extends AnyFunSpec with Matchers {
 
-    val input = scala.io.Source.fromInputStream(getClass.getResourceAsStream("example.txt")).mkString
+    val input = Utils.readLinesFromRsc("example.txt")
 
     describe("Given a game part") {
         it("Should yield 1") {
@@ -44,8 +44,8 @@ case class ExampleTest() extends AnyFunSpec with Matchers {
                         redDraw = 4
                     ),
                     Sequence(
-                       redDraw = 1,
-                        greenDraw =  2,
+                        redDraw = 1,
+                        greenDraw = 2,
                         blueDraw = 6
                     ),
                     Sequence(
@@ -57,7 +57,10 @@ case class ExampleTest() extends AnyFunSpec with Matchers {
     }
 
     describe("Given the full input") {
-
+        it("Should yield 8") {
+            val parsedGames = Game.parseInput(input)
+            Game.sumPossibleGames(parsedGames, Configuration(maxRed = 12, maxGreen = 13, maxBlue = 14)) shouldEqual 8
+        }
     }
 
 }
