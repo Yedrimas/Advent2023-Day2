@@ -5,6 +5,13 @@ case class Game(
     def isPossible(configuration: Configuration): Boolean = {
         sequences.forall(_.isPossible(configuration))
     }
+
+    def getMinimumConfiguration: Configuration = {
+        Configuration.reduceToMinimumConfiguration(
+            sequences
+              .map(_.getThisConfiguration)
+        )
+    }
 }
 
 
@@ -42,6 +49,15 @@ case object Game {
           .map(_.id)
           .reduceOption(_ + _)
           .getOrElse(0)
+    }
+
+    def sumMinimumConfigurations(games: Iterable[Game]): Int = {
+        // Alter minimum to avoid multiplying by 0
+        def minIs1(i : Int) = Math.max(i, 1)
+
+        games.map(_.getMinimumConfiguration)
+          .map(conf => minIs1(conf.maxRed) * minIs1(conf.maxGreen) * minIs1(conf.maxBlue))
+          .sum
     }
 
 }

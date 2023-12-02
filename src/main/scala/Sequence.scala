@@ -21,6 +21,12 @@ case class Sequence(
     def isPossible(maxRed: Int, maxGreen: Int, maxBlue: Int): Boolean = {
         redDraw <= maxRed && greenDraw <= maxGreen && blueDraw <= maxBlue
     }
+
+    def getThisConfiguration: Configuration = {
+        Configuration(
+            maxRed = redDraw, maxGreen = greenDraw, maxBlue = blueDraw
+        )
+    }
 }
 
 object Sequence {
